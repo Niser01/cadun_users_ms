@@ -198,7 +198,7 @@ func (r *View_struct) Create_requesttype(ctx context.Context, Status string) err
 }
 
 func (r *View_struct) Update_request_status_Byid(ctx context.Context, id int, request_status int) error {
-	_, err := r.db.ExecContext(ctx, queryupdate_request_status_Byid, request_status, id) // Cambié el orden aquí
+	_, err := r.db.ExecContext(ctx, queryupdate_request_status_Byid, request_status, id)
 	if err != nil {
 		return err
 	}

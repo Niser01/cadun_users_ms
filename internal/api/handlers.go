@@ -142,7 +142,7 @@ func (a *API) Update_request_status_Byid(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	err = a.view.Update_request_status_Byid(ctx, parametros.RequestStatus, parametros.Id)
+	err = a.view.Update_request_status_Byid(ctx, parametros.Id, parametros.RequestStatus)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}

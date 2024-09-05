@@ -53,7 +53,7 @@ type Get_requeststatus_ByUser struct {
 }
 
 type Update_requeststatus_Byid struct {
-	Id            int `json:"id" validate:"required"`
+	Id            int `json:"id_request" validate:"required"`
 	RequestStatus int `json:"request_status" validate:"required"`
 }
 
