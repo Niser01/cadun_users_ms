@@ -88,3 +88,7 @@ type Get_cotizacion_ByRequest struct {
 type Get_cotizacion struct {
 	Id int `json:"id" validate:"required"`
 }
+
+type Get_requestId_byUserid struct {
+	UserId int `json:"idUser" validate:"required"`
+}

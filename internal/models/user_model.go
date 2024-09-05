@@ -52,3 +52,7 @@ type Get_cotizacion_data struct {
 	PDF_URL       string `db:"pdf_url"`
 	QUOTE_PDF_URL string `db:"quote_pdf_url"`
 }
+
+type Get_requestId_byUserid struct {
+	ID int `db:"id"`
+}

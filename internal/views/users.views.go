@@ -61,6 +61,11 @@ const (
 	INSERT INTO REQUEST (idUser, request_status, IAM_URL, PDF_URL, QUOTE_PDF_URL)
 	VALUES ($1, 5, ' ', ' ', ' ')`
 
+	queryget_requestid_byuserid = `
+	SELECT id
+	FROM REQUEST
+	WHERE idUser = $1`
+
 	queryupdate_request_URL = `
 	UPDATE REQUEST 
 	SET request_status = $1, IAM_URL = $2, PDF_URL = $3, QUOTE_PDF_URL = $4
@@ -211,6 +216,16 @@ func (r *View_struct) Update_request_URL(ctx context.Context, request_status int
 func (r *View_struct) Get_request_status_Byid(ctx context.Context, id int) (*models.Request_Status, error) {
 	u := &models.Request_Status{}
 	err := r.db.GetContext(ctx, u, queryget_request_status_Byid, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return u, nil
+}
+
+func (r *View_struct) Get_requestId_byUserid(ctx context.Context, id int) (*models.Get_requestId_byUserid, error) {
+	u := &models.Get_requestId_byUserid{}
+	err := r.db.GetContext(ctx, u, queryget_requestid_byuserid, id)
 	if err != nil {
 		return nil, err
 	}
