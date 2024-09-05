@@ -70,7 +70,7 @@ type Create_requesttype struct {
 }
 
 type Update_cotizacion struct {
-	Id            int    `json:"idUser" validate:"required"`
+	Id            int    `json:"idRequest" validate:"required"`
 	RequestStatus int    `json:"request_status" validate:"required"`
 	IAM_URL       string `json:"IAM_URL"`
 	PDF_URL       string `json:"PDF_URL"`
@@ -78,7 +78,7 @@ type Update_cotizacion struct {
 }
 
 type Delete_cotizacion_ByUserid struct {
-	Id int `json:"id" validate:"required"`
+	Id int `json:"idUser" validate:"required"`
 }
 
 type Get_cotizacion_ByRequest struct {
@@ -86,7 +86,7 @@ type Get_cotizacion_ByRequest struct {
 }
 
 type Get_cotizacion struct {
-	Id int `json:"id" validate:"required"`
+	Id int `json:"idRequest" validate:"required"`
 }
 
 type Get_requestId_byUserid struct {
