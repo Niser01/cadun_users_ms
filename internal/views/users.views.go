@@ -31,7 +31,7 @@ const (
 
 	queryupdate_user_Byid = `
 	UPDATE USERS_PROFILE 
-	SET names = $1, lastNames = $2, alias = $3, password = encode(digest($4, 'sha256'), 'hex'),, eMail = $5, phoneNumber = $6, country = $7, home_address = $8
+	SET names = $1, lastNames = $2, alias = $3, password = encode(digest($4, 'sha256'), 'hex'), eMail = $5, phoneNumber = $6, country = $7, home_address = $8
 	WHERE id = $9`
 
 	querydelete_user_Byid = `
