@@ -45,11 +45,11 @@ type Delete_userByid struct {
 }
 
 type Get_requeststatus_Byid struct {
-	Id int `json:"id" validate:"required"`
+	Id int `json:"id_request" validate:"required"`
 }
 
 type Get_requeststatus_ByUser struct {
-	Id int `json:"id" validate:"required"`
+	Id int `json:"id_user" validate:"required"`
 }
 
 type Update_requeststatus_Byid struct {
