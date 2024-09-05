@@ -11,8 +11,8 @@ COPY . .
 
 RUN go build -o ./CADUN_users_ms .
 COPY . .
-ARG URL=0.0.0.0:8080
-EXPOSE 8080
+ARG URL=0.0.0.0:443
+EXPOSE 443
 
 
 CMD ["./CADUN_users_ms"]
