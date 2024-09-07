@@ -187,11 +187,14 @@ func (a *API) Create_request(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	err = a.view.Create_request(ctx, parametros.Id)
+	// Llamada a la función para crear la solicitud y obtener el ID generado
+	id, err := a.view.Create_request(ctx, parametros.Id)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
-	return c.JSON(http.StatusOK, nil)
+
+	// Devolver el ID generado
+	return c.JSON(http.StatusOK, map[string]int{"id": id})
 }
 
 func (a *API) Update_request_URL(c echo.Context) error {

@@ -16,7 +16,7 @@ type View_interface interface {
 	Get_status_byid(ctx context.Context, id int) (*models.Status, error)
 	Update_userByid(ctx context.Context, names string, lastNames string, alias string, password string, eMail string, phoneNumber string, country string, home_address string, id int) error
 	Delete_userByid(ctx context.Context, id int) error
-	Create_request(ctx context.Context, idUser int) error
+	Create_request(ctx context.Context, idUser int) (int, error)
 	Delete_requests_ByUserid(ctx context.Context, idUser int) error
 	Update_request_status_Byid(ctx context.Context, id int, request_status int) error
 	Create_requesttype(ctx context.Context, Status string) error

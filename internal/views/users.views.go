@@ -59,7 +59,8 @@ const (
 
 	querycreate_request = `
 	INSERT INTO REQUEST (idUser, request_status, IAM_URL, PDF_URL, QUOTE_PDF_URL)
-	VALUES ($1, 5, ' ', ' ', ' ')`
+	VALUES ($1, 5, ' ', ' ', ' ')
+	RETURNING id`
 
 	queryget_requestid_byuserid = `
 	SELECT id
@@ -172,13 +173,13 @@ func (r *View_struct) Delete_userByid(ctx context.Context, id int) error {
 	return nil
 }
 
-// This function edits the status of a user  it uses the ExcecContext method
-func (r *View_struct) Create_request(ctx context.Context, idUser int) error {
-	_, err := r.db.ExecContext(ctx, querycreate_request, idUser)
+func (r *View_struct) Create_request(ctx context.Context, idUser int) (int, error) {
+	var id int
+	err := r.db.QueryRowContext(ctx, querycreate_request, idUser).Scan(&id)
 	if err != nil {
-		return err
+		return 0, err
 	}
-	return nil
+	return id, nil
 }
 
 func (r *View_struct) Delete_requests_ByUserid(ctx context.Context, idUser int) error {
