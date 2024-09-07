@@ -20,8 +20,8 @@ type Get_password_Byemail struct {
 }
 
 type RevisarPassword struct {
-	EMail    string `json:"eMail" validate:"required ,min=8"`
-	Password string `json:"password" validate:"required ,min=8"`
+	EMail    string `json:"eMail" `
+	Password string `json:"password" `
 }
 
 type Read_userByid struct {

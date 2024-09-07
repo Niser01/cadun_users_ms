@@ -224,18 +224,24 @@ func (a *API) RevisarPassword(c echo.Context) error {
 	parametros := dtos.RevisarPassword{}
 	err := c.Bind(&parametros)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, err)
+		return c.JSON(http.StatusBadRequest, "err")
+	}
+
+	u, _ := a.view.Get_userid_Byemail(ctx, parametros.EMail)
+	print(u)
+	if u == nil {
+		return c.JSON(http.StatusNotFound, map[string]string{"error": "User not found"})
 	}
 
 	storedPassword, error_Pass_almacenado := a.view.Get_password_Byemail(ctx, parametros.EMail)
-	if error_Pass_almacenado != nil {
 
-		return c.JSON(http.StatusInternalServerError, error_Pass_almacenado)
+	if error_Pass_almacenado != nil {
+		fmt.Println("Error fetching password:", error_Pass_almacenado.Error())
+		return c.JSON(http.StatusNotFound, map[string]string{"error": "Error fetching password"})
 	}
 
 	isValid := checkPassword(parametros.Password, storedPassword.Password)
 	if !isValid {
-
 		return c.JSON(http.StatusUnauthorized, "Incorrect Password")
 	}
 
@@ -265,10 +271,15 @@ func (a *API) Get_requestId_byUserid(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	requestid, err := a.view.Get_requestId_byUserid(ctx, parametros.UserId)
+	requestids, err := a.view.Get_requestId_byUserid(ctx, parametros.UserId)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
 
-	return c.JSON(http.StatusOK, requestid)
+	// Manejar el caso de un array vacío
+	if len(requestids) == 0 {
+		return c.JSON(http.StatusOK, []dtos.Get_requestId_byUserid{}) // Devuelve un array vacío en lugar de null
+	}
+
+	return c.JSON(http.StatusOK, requestids) // Enviar la lista completa de cotizaciones
 }

@@ -21,7 +21,7 @@ type View_interface interface {
 	Update_request_status_Byid(ctx context.Context, id int, request_status int) error
 	Create_requesttype(ctx context.Context, Status string) error
 	Update_request_URL(ctx context.Context, request_status int, IAM_URL string, PDF_URL string, QUOTE_PDF_URL string, id int) error
-	Get_requestId_byUserid(ctx context.Context, id int) (*models.Get_requestId_byUserid, error)
+	Get_requestId_byUserid(ctx context.Context, id int) ([]models.Get_requestId_byUserid, error)
 	Get_request_status_Byid(ctx context.Context, id int) (*models.Request_Status, error)
 	Get_cotizacion_data(ctx context.Context, id_request int) (*models.Get_cotizacion_data, error)
 }

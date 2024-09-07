@@ -223,14 +223,17 @@ func (r *View_struct) Get_request_status_Byid(ctx context.Context, id int) (*mod
 	return u, nil
 }
 
-func (r *View_struct) Get_requestId_byUserid(ctx context.Context, id int) (*models.Get_requestId_byUserid, error) {
-	u := &models.Get_requestId_byUserid{}
-	err := r.db.GetContext(ctx, u, queryget_requestid_byuserid, id)
+func (r *View_struct) Get_requestId_byUserid(ctx context.Context, id int) ([]models.Get_requestId_byUserid, error) {
+	var results []models.Get_requestId_byUserid                               // Cambiar a slice de resultados
+	err := r.db.SelectContext(ctx, &results, queryget_requestid_byuserid, id) // Usar SelectContext en lugar de GetContext
 	if err != nil {
 		return nil, err
 	}
 
-	return u, nil
+	// Verificar resultados devueltos
+	fmt.Printf("Resultados obtenidos: %v\n", results) // Agrega esta línea para depurar
+
+	return results, nil
 }
 
 func (r *View_struct) Get_cotizacion_data(ctx context.Context, id_request int) (*models.Get_cotizacion_data, error) {
